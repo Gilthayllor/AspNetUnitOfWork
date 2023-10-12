@@ -18,6 +18,7 @@ namespace AspNetUnityOfWork.Data.Repositories.Implementations
 
         public Task Rollback()
         {
+            _dataContext.ChangeTracker.Clear();
             return Task.CompletedTask;
         }
     }
