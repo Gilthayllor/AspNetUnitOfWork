@@ -18,6 +18,10 @@ namespace AspNetUnityOfWork.Data
 
                 x.HasKey(x => x.Id);
 
+                x.Property(x => x.Id)
+                .IsRequired()
+                .ValueGeneratedOnAdd();
+
                 x.HasMany<Book>()
                     .WithOne(x => x.Author)
                     .HasForeignKey(x => x.AuthorId);
@@ -28,14 +32,17 @@ namespace AspNetUnityOfWork.Data
                     .HasMaxLength(100);
 
                 x.Property(x => x.BookCount);
-
-                x.HasData(new Author("Gilthayllor Sousa"));
             });
 
             modelBuilder.Entity<Book>(x =>
             {
                 x.ToTable("Books");
                 x.HasKey(x => x.Id);
+
+                x.Property(x => x.Id)
+                .IsRequired()
+                .ValueGeneratedOnAdd();
+
                 x.Property(x => x.Name);
             });
         }
