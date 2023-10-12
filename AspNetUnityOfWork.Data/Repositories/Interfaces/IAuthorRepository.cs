@@ -1,7 +1,7 @@
 ﻿namespace AspNetUnityOfWork.Data.Repositories.Interfaces
 {
-    internal interface IAuthorRepository
+    public interface IAuthorRepository
     {
-        Task UpdateBookCountAsync(int idAuthor);
+        Task UpdateBookCountAsync(int auhtorId);
     }
 }

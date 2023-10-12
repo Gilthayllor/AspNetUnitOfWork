@@ -2,10 +2,10 @@
 
 namespace AspNetUnityOfWork.Data.Repositories.Interfaces
 {
-    internal interface IBookRepository
+    public interface IBookRepository
     {
         Task<Book> GetByIdAsync(int id);
 
-        Task<Book> InsertAsync(Book book);
+        Task InsertAsync(Book book);
     }
 }

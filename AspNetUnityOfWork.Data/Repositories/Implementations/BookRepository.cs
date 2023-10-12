@@ -21,13 +21,11 @@ namespace AspNetUnityOfWork.Data.Repositories.Implementations
             return book;
         }
 
-        public async Task<Book> InsertAsync(Book book)
+        public async Task InsertAsync(Book book)
         {
             try
             {
                 await _dataContext.Books.AddAsync(book);
-
-                return book;
             }
             catch (Exception)
             {

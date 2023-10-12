@@ -11,9 +11,9 @@ namespace AspNetUnityOfWork.Data.Repositories.Implementations
             _dataContext = dataContext;
         }
 
-        public async Task UpdateBookCountAsync(int idAuthor)
+        public async Task UpdateBookCountAsync(int authorId)
         {
-            var author = await _dataContext.Authors.FindAsync(idAuthor);
+            var author = await _dataContext.Authors.FindAsync(authorId);
             if (author == null)
                 throw new Exception("Author not found.");
 

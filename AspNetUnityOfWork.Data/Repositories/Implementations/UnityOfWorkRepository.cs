@@ -2,7 +2,7 @@
 
 namespace AspNetUnityOfWork.Data.Repositories.Implementations
 {
-    internal class UnityOfWorkRepository : IUnityOfWorkRepository
+    public class UnityOfWorkRepository : IUnityOfWorkRepository
     {
         private readonly DataContext _dataContext;
 
