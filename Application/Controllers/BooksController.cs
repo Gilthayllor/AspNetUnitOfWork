@@ -19,6 +19,7 @@ namespace AspNetUnityOfWork.Application.Controllers
             _bookRepository = bookRepository;
         }
 
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _bookRepository.GetAll());
