@@ -3,8 +3,6 @@ using AspNetUnityOfWork.Data.Entities;
 using AspNetUnityOfWork.Data.Repositories.Implementations;
 using AspNetUnityOfWork.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
-using System.Security.Cryptography.Xml;
 
 var builder = WebApplication.CreateBuilder(args);
 

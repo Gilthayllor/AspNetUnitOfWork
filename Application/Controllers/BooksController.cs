@@ -1,4 +1,5 @@
-﻿using AspNetUnityOfWork.Data.Entities;
+﻿using AspNetUnityOfWork.Application.ViewModel;
+using AspNetUnityOfWork.Data.Entities;
 using AspNetUnityOfWork.Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,16 +40,18 @@ namespace AspNetUnityOfWork.Application.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateBook([FromBody] Book book)
+        public async Task<IActionResult> CreateBook([FromBody] CreateBookViewModel createBook)
         {
             try
             {
-                await _bookRepository.InsertAsync(book);
-                await _authorRepository.UpdateBookCountAsync(book.AuthorId);
+                var newBook = new Book(createBook.Name, createBook.AuthorId);
+
+                await _bookRepository.InsertAsync(newBook);
+                await _authorRepository.UpdateBookCountAsync(createBook.AuthorId);
 
                 await _unityOfWorkRepository.CommitAsync();
 
-                return Ok(book);
+                return Ok(newBook);
             }
             catch (Exception e)
             {
