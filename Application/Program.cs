@@ -1,7 +1,10 @@
 using AspNetUnityOfWork.Data;
+using AspNetUnityOfWork.Data.Entities;
 using AspNetUnityOfWork.Data.Repositories.Implementations;
 using AspNetUnityOfWork.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
+using System.Security.Cryptography.Xml;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,14 +27,16 @@ if (app.Environment.IsDevelopment())
 
 app.MapControllers();
 
+SeedData();
+
 app.Run();
 
 void ConfigureDatabase()
 {
     builder.Services.AddDbContext<DataContext>(x =>
     {
-        x.UseInMemoryDatabase("UoWDatabase");
-    });
+        x.UseInMemoryDatabase(Guid.NewGuid().ToString());
+    }, ServiceLifetime.Singleton);
 }
 
 void ConfigureRepositories()
@@ -39,4 +44,20 @@ void ConfigureRepositories()
     builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
     builder.Services.AddScoped<IBookRepository, BookRepository>();
     builder.Services.AddScoped<IUnityOfWorkRepository, UnityOfWorkRepository>();
+}
+
+void SeedData()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var serviceProvider = scope.ServiceProvider;
+        var context = serviceProvider.GetRequiredService<DataContext>();
+
+        context.Database.EnsureCreated();
+
+        context.Authors.Add(new Author("Gilthayllor Sousa"));
+
+        context.SaveChanges();
+    }
+
 }
