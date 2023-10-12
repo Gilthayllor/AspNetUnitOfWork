@@ -1,5 +1,6 @@
 ﻿using AspNetUnityOfWork.Data.Entities;
 using AspNetUnityOfWork.Data.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspNetUnityOfWork.Data.Repositories.Implementations
 {
@@ -12,9 +13,14 @@ namespace AspNetUnityOfWork.Data.Repositories.Implementations
             _dataContext = dataContext;
         }
 
+        public async Task<IEnumerable<Book>> GetAll()
+        {
+            return await _dataContext.Books.AsNoTracking().ToListAsync();
+        }
+
         public async Task<Book> GetByIdAsync(int id)
         {
-            var book = await _dataContext.Books.FindAsync(id);
+            var book = await _dataContext.Books.AsNoTracking().Where(x => x.Id == id).FirstOrDefaultAsync();
             if (book == null)
                 throw new Exception("Book not found.");
 

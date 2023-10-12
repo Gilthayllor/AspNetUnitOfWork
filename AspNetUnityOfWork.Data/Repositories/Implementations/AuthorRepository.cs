@@ -1,4 +1,6 @@
-﻿using AspNetUnityOfWork.Data.Repositories.Interfaces;
+﻿using AspNetUnityOfWork.Data.Entities;
+using AspNetUnityOfWork.Data.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspNetUnityOfWork.Data.Repositories.Implementations
 {
@@ -9,6 +11,11 @@ namespace AspNetUnityOfWork.Data.Repositories.Implementations
         public AuthorRepository(DataContext dataContext)
         {
             _dataContext = dataContext;
+        }
+
+        public async Task<IEnumerable<Author>> GetAll()
+        {
+            return await _dataContext.Authors.AsNoTracking().ToListAsync();
         }
 
         public async Task UpdateBookCountAsync(int authorId)
