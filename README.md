@@ -26,4 +26,4 @@ podem ser salvas ao chamar o método `SaveChanges()`.
 
 ## Uso
 
-O projeto está pronto para rodar, sendo necessário apenas usar o comando `dotnet run`.
+O projeto está pronto para rodar, sendo necessário apenas usar o comando `dotnet run` e testar pelo `Swagger`.
