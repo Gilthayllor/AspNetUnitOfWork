@@ -8,7 +8,7 @@ namespace AspNetUnityOfWork.Data
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }
 
-        public DataContext(DbContextOptions<DataContext> options) :base(options) { }
+        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,7 +22,7 @@ namespace AspNetUnityOfWork.Data
                 .IsRequired()
                 .ValueGeneratedOnAdd();
 
-                x.HasMany<Book>()
+                x.HasMany(x => x.Books)
                     .WithOne(x => x.Author)
                     .HasForeignKey(x => x.AuthorId);
 
