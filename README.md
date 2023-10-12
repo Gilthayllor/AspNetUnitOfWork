@@ -23,3 +23,7 @@ Quando registramos o banco como Singleton, o `ChangeTracker` do contexto de dado
 podem ser salvas ao chamar o método `SaveChanges()`. 
 
 É importante mencionar que este foi um cenário específico do teste realizado neste repositório e não reflete a realidade do mundo real.
+
+## Uso
+
+O projeto está pronto para rodar, sendo necessário apenas usar o comando `dotnet run`.
